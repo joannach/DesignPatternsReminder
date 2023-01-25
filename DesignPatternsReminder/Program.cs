@@ -1,10 +1,16 @@
 ﻿using DesignPatternsReminder.OCPProduct;
+using DesignPatternsReminder.SOLID.Liskov;
 using static System.Console;
 
 namespace DesignPatternsReminder
 {
     public class Program
     {
+        static void Main(string[] args)
+        {
+            Liskov();
+        }
+
         public static void OCPProdDemo()
         {
             var apple = new Product("Apple", Color.Green, Size.Small);
@@ -31,9 +37,19 @@ namespace DesignPatternsReminder
                 new SizeSpecification(Size.Large))))
                 WriteLine($" - {p.Name} is green");
         }
-        static void Main(string[] args)
+
+        public static void Liskov()
         {
-            OCPProdDemo();
+            var countArea = new Area();
+            var rect = new Rectangle(3, 5);
+
+            WriteLine($"{rect}");
+            WriteLine($"Area: {countArea.GetArea(rect)}");
+
+            Rectangle square = new Square();
+            square.Width = 7;
+            WriteLine($"{square}");
+            WriteLine($"Area: {countArea.GetArea(square)}");
         }
     }
 }
