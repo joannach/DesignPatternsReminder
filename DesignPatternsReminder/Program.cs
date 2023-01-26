@@ -1,4 +1,5 @@
 ﻿using DesignPatternsReminder.OCPProduct;
+using DesignPatternsReminder.SOLID.DependecyInversion;
 using DesignPatternsReminder.SOLID.Liskov;
 using static System.Console;
 
@@ -8,7 +9,7 @@ namespace DesignPatternsReminder
     {
         static void Main(string[] args)
         {
-            Liskov();
+            DependencyInversion();
         }
 
         public static void OCPProdDemo()
@@ -50,6 +51,20 @@ namespace DesignPatternsReminder
             square.Width = 7;
             WriteLine($"{square}");
             WriteLine($"Area: {countArea.GetArea(square)}");
+        }
+
+        public static void DependencyInversion()
+        {
+            var parent = new Person { Name = "Konstantyn" };
+            var child1 = new Person { Name = "Dzesika" };
+            var child2 = new Person { Name = "Borys" };
+
+            // low-level module
+            var relationships = new Relationship();
+            relationships.AddParentAndChild(parent, child1);
+            relationships.AddParentAndChild(parent, child2);
+
+            new Reaserch(relationships);
         }
     }
 }
