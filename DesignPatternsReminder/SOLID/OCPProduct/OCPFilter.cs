@@ -9,7 +9,6 @@ namespace DesignPatternsReminder.OCPProduct
             foreach (var i in items)
                 if (spec.IsSatisfied(i))
                     yield return i;
-
         }
     }
 }

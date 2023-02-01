@@ -1,4 +1,6 @@
-﻿using DesignPatternsReminder.OCPProduct;
+﻿using DesignPatternsReminder.Creational.Builder;
+using DesignPatternsReminder.Creational.BuilderRecursiveGeneric;
+using DesignPatternsReminder.OCPProduct;
 using DesignPatternsReminder.SOLID.DependecyInversion;
 using DesignPatternsReminder.SOLID.Liskov;
 using static System.Console;
@@ -9,7 +11,7 @@ namespace DesignPatternsReminder
     {
         static void Main(string[] args)
         {
-            DependencyInversion();
+            BuilderRecursiveGeneric();
         }
 
         public static void OCPProdDemo()
@@ -65,6 +67,23 @@ namespace DesignPatternsReminder
             relationships.AddParentAndChild(parent, child2);
 
             new Reaserch(relationships);
+        }
+
+        public static void Builder()
+        {
+            var elemTest = new HtmlBuilder("asia");
+            elemTest.AddChildFluent("div", "some text in div");
+            elemTest.AddChildFluent("p", "title in p").AddChildFluent("a", "b");
+            WriteLine(elemTest.ToString());
+        }
+
+        public static void BuilderRecursiveGeneric()
+        {
+            WriteLine(Product.New
+                .ColourOfProcuct(Color.Blue)
+                .ProductInfoBuild("TestProd", Size.Large)
+                .Build()
+                .ToString());
         }
     }
 }
