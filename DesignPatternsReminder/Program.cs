@@ -1,5 +1,7 @@
 ﻿using DesignPatternsReminder.Creational.Builder;
+using DesignPatternsReminder.Creational.Builder.FunctionalBuilder;
 using DesignPatternsReminder.Creational.BuilderRecursiveGeneric;
+using DesignPatternsReminder.Creational.BuilderStepwise;
 using DesignPatternsReminder.OCPProduct;
 using DesignPatternsReminder.SOLID.DependecyInversion;
 using DesignPatternsReminder.SOLID.Liskov;
@@ -11,7 +13,7 @@ namespace DesignPatternsReminder
     {
         static void Main(string[] args)
         {
-            BuilderRecursiveGeneric();
+            BuilderFunctional();
         }
 
         public static void OCPProdDemo()
@@ -82,6 +84,17 @@ namespace DesignPatternsReminder
             WriteLine(Product.New
                 .ColourOfProcuct(Color.Blue)
                 .ProductInfoBuild("TestProd", Size.Large)
+                .Build()
+                .ToString());
+        }
+
+        public static void BuilderFunctional()
+        {
+            var mealBuilder = new MealBuilder();
+
+            WriteLine(mealBuilder
+                .ClassifyByType("Cake")
+                .PreparesIn(30)
                 .Build()
                 .ToString());
         }
