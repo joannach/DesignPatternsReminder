@@ -1,10 +1,11 @@
 ﻿using DesignPatternsReminder.Creational.Builder;
+using DesignPatternsReminder.Creational.Builder.FacetedBuilder;
 using DesignPatternsReminder.Creational.Builder.FunctionalBuilder;
-using DesignPatternsReminder.Creational.BuilderRecursiveGeneric;
-using DesignPatternsReminder.Creational.BuilderStepwise;
+using DesignPatternsReminder.Creational.Factory;
 using DesignPatternsReminder.OCPProduct;
 using DesignPatternsReminder.SOLID.DependecyInversion;
 using DesignPatternsReminder.SOLID.Liskov;
+using System;
 using static System.Console;
 
 namespace DesignPatternsReminder
@@ -13,7 +14,13 @@ namespace DesignPatternsReminder
     {
         static void Main(string[] args)
         {
-            BuilderFunctional();
+            PointFactoryMethod();
+        }
+
+        public static void PointFactoryMethod()
+        {
+            var point = Point.NewPolarPoint(2, 5);
+            WriteLine(point);
         }
 
         public static void OCPProdDemo()
@@ -97,6 +104,24 @@ namespace DesignPatternsReminder
                 .PreparesIn(30)
                 .Build()
                 .ToString());
+        }
+
+        public static void BuilderFacadePerson()
+        {
+            var personBuilder = new PersonBuilder();
+
+            //explicit
+            Person person = (Person)personBuilder
+                .Works
+                    .AtCompany("Microsoft")
+                    .AsA("Developer")
+                    .WithSalary(123456)
+                .Lives
+                    .In("Poznan")
+                    .WithPostCode("343534")
+                    .ByStreet("Created 1");
+
+            WriteLine(person.ToString());
         }
     }
 }
